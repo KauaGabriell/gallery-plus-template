@@ -1,7 +1,8 @@
 import { tv, type VariantProps } from "tailwind-variants";
+import ImageIcon from "../assets/icons/image.svg?react";
 import UploadIcon from "../assets/icons/upload-file.svg?react";
 import Icon from "./Icon";
-import Text from "./Text";
+import Text, { textVariants } from "./Text";
 
 export const inputSingleFileVariants = tv({
 	base: "flex flex-col items-center justify-center w-full border border-solid border-border-primary group-hover:border-border-active rounded-lg gap-1 transition",
@@ -15,9 +16,11 @@ export const inputSingleFileVariants = tv({
 
 interface SingleFileProps
 	extends VariantProps<typeof inputSingleFileVariants>,
-		Omit<React.ComponentProps<"input">, "size"> {}
+		Omit<React.ComponentProps<"input">, "size"> {
+	error?: React.ReactNode;
+}
 
-export function InputSingleFile({ size }: SingleFileProps) {
+export function InputSingleFile({ size, error }: SingleFileProps) {
 	return (
 		<div>
 			<div className="w-full relative group cursor-pointer">
@@ -30,6 +33,25 @@ export function InputSingleFile({ size }: SingleFileProps) {
 					<Text variant="label-medium" className="text-placeholder">
 						Arraste o Arquivo aqui <br /> ou clique para selecionar
 					</Text>
+				</div>
+				{error && (
+					<Text variant="label-small" className="text-accent-red">
+						{error}
+					</Text>
+				)}
+			</div>
+			<div className="flex items-center gap-3 border-2 border-border-primary rounded p-3 mt-5">
+				<Icon svg={ImageIcon} className="w-6 h-6 fill-white" />
+				<div className="flex flex-col w-full items-start">
+					<Text variant="label-medium" className="text-placeholder">
+						nomeArquivo.png
+					</Text>
+					<button
+						type="button"
+						className="text-accent-red hover:underline cursor-pointer"
+					>
+						Remover
+					</button>
 				</div>
 			</div>
 		</div>
