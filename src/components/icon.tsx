@@ -1,5 +1,5 @@
-import React from "react";
-import {tv, type VariantProps} from "tailwind-variants";
+import type React from "react";
+import { tv, type VariantProps } from "tailwind-variants";
 
 export const iconVariants = tv({
 	variants: {
@@ -26,6 +26,6 @@ export default function Icon({
 	...props
 }: IconProps) {
 	return (
-		<SvgComponent className={iconVariants({animate, className})} {...props} />
+		<SvgComponent className={iconVariants({ animate, className })} {...props} />
 	);
 }
