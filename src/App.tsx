@@ -12,7 +12,7 @@ import { InputSingleFile } from "./components/InputSingleFile";
 import { InputText } from "./components/InputText";
 
 export default function App() {
-	const form = useForm();
+	const form = useForm<{ file?: FileList }>();
 
 	return (
 		<div className="grid gap-7 p-6">
@@ -65,7 +65,12 @@ export default function App() {
 			</div>
 
 			<div>
-				<InputSingleFile form={form} {...form.register("file")} />
+				<InputSingleFile
+					allowedExtensions={["png", "jpg", "jpeg", "webp"]}
+					maxFileSizeInMB={50}
+					form={form}
+					{...form.register("file")}
+				/>
 			</div>
 		</div>
 	);

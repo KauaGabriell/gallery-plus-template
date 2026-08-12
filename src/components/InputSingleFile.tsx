@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { type UseFormReturn, useWatch } from "react-hook-form";
 import { tv, type VariantProps } from "tailwind-variants";
 import ImageIcon from "../assets/icons/image.svg?react";
@@ -21,20 +21,38 @@ interface SingleFileProps
 		Omit<React.ComponentProps<"input">, "size" | "form"> {
 	form: UseFormReturn;
 	error?: React.ReactNode;
+	allowedExtensions: string[];
+	maxFileSizeInMB: number;
 }
 
 export function InputSingleFile({
 	size,
 	error,
 	form,
+	allowedExtensions,
+	maxFileSizeInMB,
 	...props
 }: SingleFileProps) {
-	const formValues = useWatch({ control: form.control });
 	const name = props.name || "";
-	const formFile: File = React.useMemo(
-		() => formValues[name]?.[0],
-		[formValues, name],
-	);
+	const formValues = useWatch({ control: form.control, name: name });
+	const formFile: File | undefined = formValues?.[0];
+	const fileExtension = formFile?.name?.split(".")?.pop()?.toLocaleLowerCase();
+	const fileSize = formFile?.size || 0;
+
+	function isValidExtension() {
+		if (!fileExtension) {
+			return false;
+		}
+		return allowedExtensions.includes(fileExtension);
+	}
+
+	function isValidMaxSize() {
+		return fileSize <= maxFileSizeInMB * 1024 * 1024;
+	}
+
+	function isValidFile() {
+		return isValidExtension() && isValidMaxSize();
+	}
 
 	function handleRemoveFile() {
 		form.setValue(name, undefined);
@@ -42,7 +60,7 @@ export function InputSingleFile({
 
 	return (
 		<div>
-			{!formFile ? (
+			{!formFile || !isValidFile() ? (
 				<div className="w-full relative group cursor-pointer">
 					<input
 						type="file"
@@ -55,11 +73,6 @@ export function InputSingleFile({
 							Arraste o Arquivo aqui <br /> ou clique para selecionar
 						</Text>
 					</div>
-					{error && (
-						<Text variant="label-small" className="text-accent-red">
-							{error}
-						</Text>
-					)}
 				</div>
 			) : (
 				<div className="flex items-center gap-3 border-2 border-border-primary rounded p-3 mt-5">
@@ -77,6 +90,21 @@ export function InputSingleFile({
 						</button>
 					</div>
 				</div>
+			)}
+			{formFile && !isValidExtension() && (
+				<Text variant="label-small" className="text-accent-red">
+					Tipo do arquivo inválido
+				</Text>
+			)}
+			{formFile && !isValidMaxSize() && (
+				<Text variant="label-small" className="text-accent-red">
+					Tamanho do arquivo ultrapassa o limite: {maxFileSizeInMB}MB
+				</Text>
+			)}
+			{error && (
+				<Text variant="label-small" className="text-accent-red">
+					{error}
+				</Text>
 			)}
 		</div>
 	);
