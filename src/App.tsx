@@ -1,14 +1,14 @@
-import searchIcon from "../src/assets/icons/search.svg?react";
 import ChevronLeftIcon from "./assets/icons/chevron-left.svg?react";
 import ChevronRightIcon from "./assets/icons/chevron-right.svg?react";
-import Alert from "./components/alert";
-import Badge from "./components/badge";
-import Button from "./components/button";
-import ButtonIcon from "./components/button-icon";
-import Divider from "./components/divider";
-import { InputCheckbox } from "./components/input-checkbox";
-import { InputSingleFile } from "./components/input-singlefile";
-import { InputText } from "./components/input-text";
+import searchIcon from "./assets/icons/search.svg?react";
+import Alert from "./components/Alert";
+import Badge from "./components/Badge";
+import Button from "./components/Button";
+import ButtonIcon from "./components/ButtonIcon";
+import Divider from "./components/Divider";
+import { InputCheckbox } from "./components/InputCheckbox";
+import { InputSingleFile } from "./components/InputSingleFile";
+import { InputText } from "./components/InputText";
 
 export default function App() {
 	return (

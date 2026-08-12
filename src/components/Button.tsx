@@ -2,8 +2,8 @@ import cx from "classnames";
 import type React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import SpinnerIcon from "../assets/icons/spinner.svg?react";
-import Icon from "./icon";
-import Text from "./text";
+import Icon from "./Icon";
+import Text from "./Text";
 
 export const buttonVariants = tv({
 	base: "flex items-center justify-center cursor-pointer transition rounded group gap-1",
@@ -121,6 +121,7 @@ export default function Button({
 			</Text>
 			{(icon || handling) && (
 				<Icon
+					// biome-ignore lint/style/noNonNullAssertion: <Icon Conflit>
 					svg={handling ? SpinnerIcon : icon!}
 					animate={handling}
 					className={buttonIconVariants({ variant, size, handling })}

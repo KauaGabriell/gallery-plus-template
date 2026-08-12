@@ -1,7 +1,7 @@
 import { tv, type VariantProps } from "tailwind-variants";
 import UploadIcon from "../assets/icons/upload-file.svg?react";
-import Icon from "./icon";
-import Text from "./text";
+import Icon from "./Icon";
+import Text from "./Text";
 
 export const inputSingleFileVariants = tv({
 	base: "flex flex-col items-center justify-center w-full border border-solid border-border-primary group-hover:border-border-active rounded-lg gap-1 transition",
