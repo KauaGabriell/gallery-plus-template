@@ -1,5 +1,5 @@
 import React from "react";
-import { useWatch } from "react-hook-form";
+import { type UseFormReturn, useWatch } from "react-hook-form";
 import { tv, type VariantProps } from "tailwind-variants";
 import ImageIcon from "../assets/icons/image.svg?react";
 import UploadIcon from "../assets/icons/upload-file.svg?react";
@@ -18,7 +18,7 @@ export const inputSingleFileVariants = tv({
 
 interface SingleFileProps
 	extends VariantProps<typeof inputSingleFileVariants>,
-		Omit<React.ComponentProps<"input">, "size"> {
+		Omit<React.ComponentProps<"input">, "size" | "form"> {
 	form: UseFormReturn;
 	error?: React.ReactNode;
 }
