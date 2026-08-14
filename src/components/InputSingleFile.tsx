@@ -1,4 +1,5 @@
 import type React from "react";
+import type { ReactNode } from "react";
 import { type UseFormReturn, useWatch } from "react-hook-form";
 import { tv, type VariantProps } from "tailwind-variants";
 import ImageIcon from "../assets/icons/image.svg?react";
@@ -22,6 +23,7 @@ interface SingleFileProps
 	form: UseFormReturn;
 	error?: React.ReactNode;
 	allowedExtensions: string[];
+	replaceBy: ReactNode;
 	maxFileSizeInMB: number;
 }
 
@@ -30,6 +32,7 @@ export function InputSingleFile({
 	error,
 	form,
 	allowedExtensions,
+	replaceBy,
 	maxFileSizeInMB,
 	...props
 }: SingleFileProps) {
@@ -75,21 +78,24 @@ export function InputSingleFile({
 					</div>
 				</div>
 			) : (
-				<div className="flex items-center gap-3 border-2 border-border-primary rounded p-3 mt-5">
-					<Icon svg={ImageIcon} className="w-6 h-6 fill-white" />
-					<div className="flex flex-col w-full items-start">
-						<Text variant="label-medium" className="text-placeholder">
-							{formFile.name}
-						</Text>
-						<button
-							type="button"
-							className="text-accent-red hover:underline cursor-pointer"
-							onClick={handleRemoveFile}
-						>
-							Remover
-						</button>
+				<>
+					{replaceBy}
+					<div className="flex items-center gap-3 border-2 border-border-primary rounded p-3 mt-5">
+						<Icon svg={ImageIcon} className="w-6 h-6 fill-white" />
+						<div className="flex flex-col w-full items-start">
+							<Text variant="label-medium" className="text-placeholder">
+								{formFile.name}
+							</Text>
+							<button
+								type="button"
+								className="text-accent-red hover:underline cursor-pointer"
+								onClick={handleRemoveFile}
+							>
+								Remover
+							</button>
+						</div>
 					</div>
-				</div>
+				</>
 			)}
 			{formFile && !isValidExtension() && (
 				<Text variant="label-small" className="text-accent-red">

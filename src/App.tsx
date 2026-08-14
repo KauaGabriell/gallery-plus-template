@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import ChevronLeftIcon from "./assets/icons/chevron-left.svg?react";
 import ChevronRightIcon from "./assets/icons/chevron-right.svg?react";
@@ -7,12 +8,28 @@ import Badge from "./components/Badge";
 import Button from "./components/Button";
 import ButtonIcon from "./components/ButtonIcon";
 import Divider from "./components/Divider";
+import { ImagePreview } from "./components/ImagePreview";
 import { InputCheckbox } from "./components/InputCheckbox";
 import { InputSingleFile } from "./components/InputSingleFile";
 import { InputText } from "./components/InputText";
 
 export default function App() {
 	const form = useForm<{ file?: FileList }>();
+	const file = form.watch("file");
+	const fileForPreview = file?.[0];
+	const [imageSource, setImageSource] = useState<string>();
+
+	useEffect(() => {
+		if (!fileForPreview) {
+			setImageSource(undefined);
+			return;
+		}
+
+		const objectUrl = URL.createObjectURL(fileForPreview);
+		setImageSource(objectUrl);
+
+		return () => URL.revokeObjectURL(objectUrl);
+	}, [fileForPreview]);
 
 	return (
 		<div className="grid gap-7 p-6">
@@ -69,6 +86,7 @@ export default function App() {
 					allowedExtensions={["png", "jpg", "jpeg", "webp"]}
 					maxFileSizeInMB={50}
 					form={form}
+					replaceBy={<ImagePreview imgSource={imageSource} />}
 					{...form.register("file")}
 				/>
 			</div>
