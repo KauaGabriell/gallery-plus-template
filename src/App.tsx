@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router";
-import Components from "./pages/Components";
+import { Components } from "./pages/Components";
 import { Home } from "./pages/Home";
 import { Layout } from "./pages/Layout";
 import { PhotoDetails } from "./pages/PhotoDetails";

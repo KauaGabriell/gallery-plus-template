@@ -22,7 +22,7 @@ import { InputCheckbox } from "../components/InputCheckbox";
 import { InputSingleFile } from "../components/InputSingleFile";
 import { InputText } from "../components/InputText";
 
-export default function Components() {
+export function Components() {
 	const form = useForm<{ file?: FileList }>();
 	const file = form.watch("file");
 	const fileForPreview = file?.[0];
@@ -125,6 +125,10 @@ export default function Components() {
 						</DialogFooter>
 					</DialogContent>
 				</Dialog>
+			</div>
+
+			<div>
+				<Divider orientation="vertical" />
 			</div>
 		</div>
 	);
