@@ -54,14 +54,15 @@ export function InputText({
 	className,
 	icon,
 	error,
+	...props
 }: InputTextProps) {
 	return (
-		<div className={inputTextContainerVariants(className)}>
+		<div className={inputTextContainerVariants({ className })}>
 			<div className={inputTextWrapperVariants({ size, disabled })}>
 				{icon && (
 					<Icon svg={icon} className={inputTextIconVariants({ size })} />
 				)}
-				<input className={inputTextVariants({})} />
+				<input className={inputTextVariants({})} {...props} />
 			</div>
 			{error && (
 				<Text variant="label-small" className="text-accent-red">
