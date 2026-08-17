@@ -119,13 +119,19 @@ export default function Button({
 			>
 				{children}
 			</Text>
-			{(icon || handling) && (
+			{handling ? (
 				<Icon
-					// biome-ignore lint/style/noNonNullAssertion: <Icon Conflit>
-					svg={handling ? SpinnerIcon : icon!}
+					svg={SpinnerIcon}
 					animate={handling}
 					className={buttonIconVariants({ variant, size, handling })}
 				/>
+			) : (
+				icon && (
+					<Icon
+						svg={icon}
+						className={buttonIconVariants({ variant, size, handling })}
+					/>
+				)
 			)}
 		</button>
 	);

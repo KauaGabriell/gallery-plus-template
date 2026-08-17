@@ -7,6 +7,8 @@ import Skeleton from "../../../components/Skeleton";
 import Text from "../../../components/Text";
 import type { Photo } from "../models/photo";
 
+const skeletonAlbumIds = ["skeleton-0", "skeleton-1"];
+
 interface PhotoWidgetProps {
 	photo: Photo;
 	loading?: boolean;
@@ -46,14 +48,8 @@ export function PhotoWidget({ photo, loading }: PhotoWidgetProps) {
 							)}
 						</>
 					) : (
-						Array.from({ length: 2 }).map((_, index) => (
-							<Skeleton
-								className="w-full h-4 rounded-sm"
-								key={`album-loadind-${
-									// biome-ignore lint/suspicious/noArrayIndexKey: <Key>
-									index
-								}`}
-							/>
+						skeletonAlbumIds.map((skeletonId) => (
+							<Skeleton className="w-full h-4 rounded-sm" key={skeletonId} />
 						))
 					)}
 				</div>
