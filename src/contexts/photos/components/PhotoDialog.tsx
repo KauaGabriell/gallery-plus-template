@@ -37,7 +37,7 @@ export function PhotoDialog({ trigger }: PhotoDialogProps) {
 	];
 	return (
 		<Dialog>
-			<DialogTrigger>{trigger}</DialogTrigger>
+			<DialogTrigger asChild>{trigger}</DialogTrigger>
 			<DialogContent>
 				<DialogHeader>Adicionar Foto</DialogHeader>
 				<DialogBody className="flex flex-col gap-5 mt-7">
@@ -73,7 +73,7 @@ export function PhotoDialog({ trigger }: PhotoDialogProps) {
 					</div>
 				</DialogBody>
 				<DialogFooter>
-					<DialogClose>
+					<DialogClose asChild>
 						<Button variant="secondary">Cancelar</Button>
 					</DialogClose>
 					<Button variant="primary">Adicionar</Button>
