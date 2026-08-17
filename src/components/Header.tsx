@@ -1,6 +1,7 @@
 import cx from "classnames";
 import { Link } from "react-router";
 import Logo from "../assets/images/galeria-plus-full-logo.svg?react";
+import { PhotoDialog } from "../contexts/photos/components/PhotoDialog";
 import Button from "./Button";
 import Container from "./Container";
 import Divider from "./Divider";
@@ -22,7 +23,7 @@ export function MainHeader({
 			<PhotoSearch />
 			<Divider orientation="vertical" className="h-10" />
 			<div className="flex gap-3">
-				<Button>Nova Foto</Button>
+				<PhotoDialog trigger={<Button>Nova Foto</Button>} />
 				<Button variant="secondary">Criar álbum</Button>
 			</div>
 		</Container>
