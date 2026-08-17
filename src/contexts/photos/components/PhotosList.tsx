@@ -1,7 +1,7 @@
 import Skeleton from "../../../components/Skeleton";
 import Text from "../../../components/Text";
 import type { Photo } from "../models/photo";
-import { PhotoWidget } from "./PhotoWidget";
+import { PhotoWidget } from "./PhotosWidget";
 
 const skeletonPhotos = Array.from(
 	{ length: 10 },

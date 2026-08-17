@@ -1,7 +1,7 @@
 import Container from "../components/Container";
 import { AlbunsFilter } from "../contexts/albums/components/AlbunsList";
 import type { Album } from "../contexts/albums/models/album";
-import { PhotoList } from "../contexts/photos/components/PhotoList";
+import { PhotoList } from "../contexts/photos/components/PhotosList";
 import type { Photo } from "../contexts/photos/models/photo";
 
 const homePhotos: Photo[] = [
@@ -48,8 +48,8 @@ const homeAlbums: Album[] = [
 export function Home() {
 	return (
 		<Container>
-			<AlbunsFilter loading albums={homeAlbums} />
-			<PhotoList loading photos={homePhotos} />
+			<AlbunsFilter albums={homeAlbums} />
+			<PhotoList photos={homePhotos} />
 		</Container>
 	);
 }
