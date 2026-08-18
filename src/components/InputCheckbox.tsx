@@ -29,7 +29,7 @@ export const inputCheckboxVariants = tv({
 });
 
 export const inputCheckboxIconVariants = tv({
-	base: "absolute top-1/2 -translate-y-1/2 hidden peer-checked:block fill-white cursor-pointer",
+	base: "absolute top-1/2 -translate-y-1/2 hidden peer-checked:block fill-white cursor-pointer pointer-events-none",
 	variants: {
 		size: {
 			sm: "w-3 h-3 left-px",
@@ -41,23 +41,35 @@ export const inputCheckboxIconVariants = tv({
 
 interface InputCheckboxProps
 	extends VariantProps<typeof inputCheckboxVariants>,
-		Omit<React.ComponentProps<"input">, "size"> {}
+		Omit<React.ComponentProps<"input">, "size"> {
+	wrapperClassName?: string;
+}
 
 export function InputCheckbox({
 	className,
+	wrapperClassName,
 	disabled,
 	size,
 	variant,
 	...props
 }: InputCheckboxProps) {
 	return (
-		<label className={inputCheckboxWrapperVariants()}>
+		<span
+			className={inputCheckboxWrapperVariants({
+				className: wrapperClassName,
+			})}
+		>
 			<input
 				type="checkbox"
-				className={inputCheckboxVariants({ size, disabled, variant })}
+				className={inputCheckboxVariants({
+					size,
+					disabled,
+					variant,
+					className,
+				})}
 				{...props}
 			/>
 			<Icon svg={CheckIcon} className={inputCheckboxIconVariants({ size })} />
-		</label>
+		</span>
 	);
 }

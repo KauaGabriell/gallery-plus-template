@@ -10,10 +10,10 @@ import {
 	DialogHeader,
 	DialogTrigger,
 } from "../../../components/Dialog";
-import { ImagePreview } from "../../../components/ImagePreview";
 import { InputText } from "../../../components/InputText";
 import Skeleton from "../../../components/Skeleton";
 import Text from "../../../components/Text";
+import { PhotoImageSelectable } from "../../photos/components/PhotoImageSelectable";
 import type { Photo } from "../../photos/models/photo";
 
 interface AlbumDialogProps {
@@ -25,8 +25,19 @@ const skeletonPhotosIds = Array.from(
 	(_, index) => `skeleton-${index}`,
 );
 export function AlbumDialog({ trigger }: AlbumDialogProps) {
-	const photos: Photo[] = []; //API FUTURA
+	const photos: Photo[] = [
+		{
+			id: "1",
+			title: "Foto",
+			imgId: "wide-tree.png",
+			album: [{ id: "2", title: "Natureza" }],
+		},
+	]; //API FUTURA
 	const isLoadingPhotos = false;
+
+	function handleTogglePhoto(selected: boolean, photoId: string) {
+		console.log(selected, photoId);
+	}
 
 	return (
 		<Dialog>
@@ -51,10 +62,12 @@ export function AlbumDialog({ trigger }: AlbumDialogProps) {
 							{!isLoadingPhotos && photos.length > 0 && (
 								<div className="flex gap-3 flex-wrap">
 									{photos.map((photo) => (
-										<ImagePreview
+										<PhotoImageSelectable
 											key={photo.id}
-											className="w-20 h-20 rounded-lg"
 											src={`/images/${photo.imgId}`}
+											onSelectImage={(selected) =>
+												handleTogglePhoto(selected, photo.id)
+											}
 										/>
 									))}
 								</div>
