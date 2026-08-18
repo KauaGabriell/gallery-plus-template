@@ -1,6 +1,7 @@
 import cx from "classnames";
 import { Link } from "react-router";
 import Logo from "../assets/images/galeria-plus-full-logo.svg?react";
+import { AlbumDialog } from "../contexts/albums/components/AlbumDialog";
 import { PhotoDialog } from "../contexts/photos/components/PhotoDialog";
 import Button from "./Button";
 import Container from "./Container";
@@ -24,7 +25,9 @@ export function MainHeader({
 			<Divider orientation="vertical" className="h-10" />
 			<div className="flex gap-3">
 				<PhotoDialog trigger={<Button>Nova Foto</Button>} />
-				<Button variant="secondary">Criar álbum</Button>
+				<AlbumDialog
+					trigger={<Button variant="secondary">Criar álbum</Button>}
+				/>
 			</div>
 		</Container>
 	);
