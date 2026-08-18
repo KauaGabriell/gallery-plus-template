@@ -4,6 +4,10 @@ export const api = axios.create({
 	baseURL: import.meta.env.VITE_API_URL,
 });
 
-export const fetcher = (url: string, options: AxiosRequestConfig = {}) => {
-	api.get(url, options).then((res) => res.data);
+export const fetcher = async (
+	url: string,
+	options: AxiosRequestConfig = {},
+) => {
+	const response = await api.get(url, options);
+	return response.data;
 };

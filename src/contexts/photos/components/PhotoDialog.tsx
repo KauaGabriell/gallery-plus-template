@@ -16,6 +16,7 @@ import { InputSingleFile } from "../../../components/InputSingleFile";
 import { InputText } from "../../../components/InputText";
 import Skeleton from "../../../components/Skeleton";
 import Text from "../../../components/Text";
+import { useAlbuns } from "../../albums/hooks/useAlbuns";
 
 interface PhotoDialogProps {
 	trigger: React.ReactNode;
@@ -29,12 +30,7 @@ const skeletonAlbunsIds = Array.from(
 
 export function PhotoDialog({ trigger }: PhotoDialogProps) {
 	const form = useForm();
-	const isLoadingPhotoDialog = true;
-	const albuns = [
-		{ id: "1", title: "Espaços" },
-		{ id: "2", title: "Viagens" },
-		{ id: "3", title: "Pets" },
-	];
+	const { albuns, isLoadingAlbuns } = useAlbuns();
 	return (
 		<Dialog>
 			<DialogTrigger asChild>{trigger}</DialogTrigger>
@@ -55,7 +51,7 @@ export function PhotoDialog({ trigger }: PhotoDialogProps) {
 					/>
 					<div className="flex flex-col gap-3">
 						<Text variant="label-small">Selecionar Álbum</Text>
-						{!isLoadingPhotoDialog ? (
+						{!isLoadingAlbuns ? (
 							<div className="flex gap-3">
 								{albuns.map((album) => (
 									<Button variant="ghost" key={album.id}>
