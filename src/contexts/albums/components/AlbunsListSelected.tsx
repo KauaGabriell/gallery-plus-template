@@ -22,7 +22,7 @@ export function AlbunsListSelected({
 	photo,
 }: AlbunsListSelectedProps) {
 	function isChecked(albumId: string) {
-		const teste = photo.album.some((album) => album.id === albumId);
+		const teste = photo.albums.some((album) => album.id === albumId);
 		return teste;
 	}
 
@@ -30,11 +30,11 @@ export function AlbunsListSelected({
 		let albunsIds: string[] = [];
 
 		if (isChecked(albumId)) {
-			albunsIds = photo.album
+			albunsIds = photo.albums
 				.filter((album) => album.id !== albumId)
 				.map((album) => album.id);
 		} else {
-			albunsIds = [...photo.album.map((album) => album.id), albumId];
+			albunsIds = [...photo.albums.map((album) => album.id), albumId];
 		}
 		console.log(albunsIds);
 	}

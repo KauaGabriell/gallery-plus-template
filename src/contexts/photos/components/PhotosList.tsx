@@ -7,7 +7,7 @@ const skeletonPhotos = Array.from(
 	{ length: 10 },
 	(_, index) => `skeleton-${index}`,
 );
-const skeletonPhoto: Photo = { id: "", title: "", imgId: "", album: [] };
+const skeletonPhoto: Photo = { id: "", title: "", imageId: "", albums: [] };
 
 interface PhotoListProps {
 	photos: Photo[];

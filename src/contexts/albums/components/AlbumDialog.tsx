@@ -14,7 +14,7 @@ import { InputText } from "../../../components/InputText";
 import Skeleton from "../../../components/Skeleton";
 import Text from "../../../components/Text";
 import { PhotoImageSelectable } from "../../photos/components/PhotoImageSelectable";
-import type { Photo } from "../../photos/models/photo";
+import { usePhotos } from "../../photos/hooks/usePhotos";
 
 interface AlbumDialogProps {
 	trigger: React.ReactNode;
@@ -25,15 +25,7 @@ const skeletonPhotosIds = Array.from(
 	(_, index) => `skeleton-${index}`,
 );
 export function AlbumDialog({ trigger }: AlbumDialogProps) {
-	const photos: Photo[] = [
-		{
-			id: "1",
-			title: "Foto",
-			imgId: "wide-tree.png",
-			album: [{ id: "2", title: "Natureza" }],
-		},
-	]; //API FUTURA
-	const isLoadingPhotos = false;
+	const { photos, isLoadingPhotos } = usePhotos();
 
 	function handleTogglePhoto(selected: boolean, photoId: string) {
 		console.log(selected, photoId);
@@ -64,7 +56,7 @@ export function AlbumDialog({ trigger }: AlbumDialogProps) {
 									{photos.map((photo) => (
 										<PhotoImageSelectable
 											key={photo.id}
-											src={`/images/${photo.imgId}`}
+											src={`${import.meta.env.VITE_IMAGES_URL}/${photo.imageId}`}
 											onSelectImage={(selected) =>
 												handleTogglePhoto(selected, photo.id)
 											}

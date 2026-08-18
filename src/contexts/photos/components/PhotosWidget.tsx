@@ -1,5 +1,4 @@
 import { Link } from "react-router";
-import imgTest from "../../../assets/images/enchanted-forest-fantasy-background.jpg";
 import Badge from "../../../components/Badge";
 import { buttonTextVariants, buttonVariants } from "../../../components/Button";
 import { ImagePreview } from "../../../components/ImagePreview";
@@ -19,7 +18,7 @@ export function PhotoWidget({ photo, loading }: PhotoWidgetProps) {
 		<div className="flex flex-col gap-4">
 			{!loading ? (
 				<ImagePreview
-					src={imgTest}
+					src={`${import.meta.env.VITE_IMAGES_URL}/${photo.imageId}`}
 					title={photo.title}
 					className="w-[10.875rem] h-[10.875rem] rounded-lg"
 				/>
@@ -35,16 +34,16 @@ export function PhotoWidget({ photo, loading }: PhotoWidgetProps) {
 				) : (
 					<Skeleton className="w-full h-6" />
 				)}
-				<div className="flex felx-col gap-1 min-h-5">
+				<div className="flex gap-1 min-h-5">
 					{!loading ? (
 						<>
-							{photo.album.slice(0, 1).map((album) => (
+							{photo.albums.slice(0, 1).map((album) => (
 								<Badge className="truncate" size="xs" key={album.id}>
 									{album.title}
 								</Badge>
 							))}
-							{photo.album.length > 1 && (
-								<Badge size="xs">+{photo.album.length - 1}</Badge>
+							{photo.albums.length > 1 && (
+								<Badge size="xs">+{photo.albums.length - 1}</Badge>
 							)}
 						</>
 					) : (
