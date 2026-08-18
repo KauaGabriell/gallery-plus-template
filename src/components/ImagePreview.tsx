@@ -15,14 +15,15 @@ interface ImagePreviewProps extends React.ComponentProps<"img"> {
 
 export function ImagePreview({
 	imgSource,
+	src,
 	className,
 	...props
 }: ImagePreviewProps) {
 	return (
-		<div className={ImagePreviewWrapperVariants()}>
+		<div className={ImagePreviewWrapperVariants({ className })}>
 			<img
-				className={ImagePreviewVariants({ className })}
-				src={imgSource}
+				className={ImagePreviewVariants()}
+				src={src ?? imgSource}
 				alt="Imagem"
 				{...props}
 			/>

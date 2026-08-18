@@ -19,7 +19,7 @@ export function PhotoWidget({ photo, loading }: PhotoWidgetProps) {
 		<div className="flex flex-col gap-4">
 			{!loading ? (
 				<ImagePreview
-					imgSource={imgTest}
+					src={imgTest}
 					title={photo.title}
 					className="w-[10.875rem] h-[10.875rem] rounded-lg"
 				/>
