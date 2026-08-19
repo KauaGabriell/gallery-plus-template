@@ -1,4 +1,4 @@
-import { randomUUID } from "crypto";
+import { randomUUID } from "node:crypto";
 import type { Album } from "../models";
 import type { DatabaseService } from "../services/database-service";
 import type { CreateAlbumRequest } from "./albums-interfaces";

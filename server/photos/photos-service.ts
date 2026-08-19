@@ -1,4 +1,4 @@
-import { randomUUID } from "crypto";
+import { randomUUID } from "node:crypto";
 import type { Album, Photo } from "../models.ts";
 import type { DatabaseService } from "../services/database-service.ts";
 import type { ImageService } from "../services/image-service.ts";

@@ -8,7 +8,7 @@ export async function albumsRoutes(
 	albumsService: AlbumsService,
 ) {
 	// GET /albums
-	fastify.get("/albums", async (request, reply) => {
+	fastify.get("/albums", async (_request, reply) => {
 		try {
 			const albums = await albumsService.getAllAlbums();
 			reply.send(albums);
