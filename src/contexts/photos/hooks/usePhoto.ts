@@ -15,6 +15,7 @@ export function usePhoto(id?: string) {
 			queryFn: async () => fetcher(`/photos/${id}`),
 			enabled: !!id,
 		});
+
 	return {
 		photo: data,
 		errorPhotos: error,
