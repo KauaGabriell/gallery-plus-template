@@ -46,7 +46,7 @@ export function PhotoImageSelectable({
 			<InputCheckbox
 				id={checkboxId}
 				size="sm"
-				checked={isSelected}
+				defaultChecked={isSelected}
 				onChange={handleSelect}
 				wrapperClassName="absolute z-10 top-1 left-1"
 			/>
