@@ -56,10 +56,13 @@ export function DialogOverlay({
 
 export function DialogContent({
 	className,
+	cardSize = "lg",
 	children,
 	ref,
 	...props
-}: React.ComponentProps<typeof DialogPrimitive.Content>) {
+}: React.ComponentProps<typeof DialogPrimitive.Content> & {
+	cardSize?: "none" | "md" | "lg";
+}) {
 	return (
 		<DialogPortal>
 			<DialogOverlay />
@@ -71,7 +74,7 @@ export function DialogContent({
 				)}
 				{...props}
 			>
-				<Card size="lg" variant="primary">
+				<Card size={cardSize} variant="primary">
 					{children}
 				</Card>
 			</DialogPrimitive.Content>

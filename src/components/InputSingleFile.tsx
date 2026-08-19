@@ -1,6 +1,11 @@
 import type React from "react";
 import type { ReactNode } from "react";
-import { type UseFormReturn, useWatch } from "react-hook-form";
+import {
+	type FieldPathByValue,
+	type FieldValues,
+	type UseFormReturn,
+	useWatch,
+} from "react-hook-form";
 import { tv, type VariantProps } from "tailwind-variants";
 import ImageIcon from "../assets/icons/image.svg?react";
 import UploadIcon from "../assets/icons/upload-file.svg?react";
@@ -17,27 +22,33 @@ export const inputSingleFileVariants = tv({
 	defaultVariants: { size: "md" },
 });
 
-interface SingleFileProps
-	extends VariantProps<typeof inputSingleFileVariants>,
-		Omit<React.ComponentProps<"input">, "size" | "form"> {
-	form: UseFormReturn;
+interface SingleFileProps<
+	TForm extends FieldValues,
+	TName extends FieldPathByValue<TForm, FileList | undefined>,
+> extends VariantProps<typeof inputSingleFileVariants>,
+		Omit<React.ComponentProps<"input">, "name" | "size" | "form"> {
+	form: UseFormReturn<TForm>;
+	name: TName;
 	error?: React.ReactNode;
 	allowedExtensions: string[];
 	replaceBy: ReactNode;
 	maxFileSizeInMB: number;
 }
 
-export function InputSingleFile({
+export function InputSingleFile<
+	TForm extends FieldValues,
+	TName extends FieldPathByValue<TForm, FileList | undefined>,
+>({
 	size,
 	error,
 	form,
+	name,
 	allowedExtensions,
 	replaceBy,
 	maxFileSizeInMB,
 	...props
-}: SingleFileProps) {
-	const name = props.name || "";
-	const formValues = useWatch({ control: form.control, name: name });
+}: SingleFileProps<TForm, TName>) {
+	const formValues = useWatch<TForm, TName>({ control: form.control, name });
 	const formFile: File | undefined = formValues?.[0];
 	const fileExtension = formFile?.name?.split(".")?.pop()?.toLocaleLowerCase();
 	const fileSize = formFile?.size || 0;
@@ -58,7 +69,7 @@ export function InputSingleFile({
 	}
 
 	function handleRemoveFile() {
-		form.setValue(name, undefined);
+		form.resetField(name);
 	}
 
 	return (
@@ -67,6 +78,7 @@ export function InputSingleFile({
 				<div className="w-full relative group cursor-pointer">
 					<input
 						type="file"
+						name={name}
 						className="absolute top-0 right-0 w-full h-full opacity-0 cursor-pointer"
 						{...props}
 					/>
